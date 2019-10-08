@@ -1,10 +1,10 @@
 <template>
-  <div class="calculator">
+  <div class="calculator threed">
     <div class="display">{{ current || "0" }}</div>
-    <div @click="clear" class="btn">C</div>
-    <div @click="sign" class="btn">+/-</div>
-    <div @click="percent" class="btn">%</div>
-    <div @click="divide" class="btn operator">÷</div>
+    <div @click="clear" class="btn operator top-operator">C</div>
+    <div @click="sign" class="btn operator top-operator">+/-</div>
+    <div @click="percent" class="btn operator top-operator">%</div>
+    <div @click="divide" class="btn operator">/</div>
     <div @click="append('7')" class="btn">7</div>
     <div @click="append('8')" class="btn">8</div>
     <div @click="append('9')" class="btn">9</div>
@@ -18,8 +18,9 @@
     <div @click="append('3')" class="btn">3</div>
     <div @click="add" class="btn operator">+</div>
     <div @click="append('0')" class="btn zero">0</div>
+    <div @click="append('0')" class="btn zero">00</div>
     <div @click="dot" class="btn">.</div>
-    <div @click="equal" class="btn operator">=</div>
+    <div @click="equal" class="btn operator equals">=</div>
   </div>
 </template>
 
@@ -63,7 +64,7 @@ export default {
       this.operatorClicked = true;
     },
     divide() {
-      this.operator = (a, b) => a / b;
+      this.operator = (a, b) => b / a;
       this.setPrevious();
     },
     times() {
@@ -89,41 +90,72 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+$red: #ea6262;
 .calculator {
   margin: 0 auto;
   width: 400px;
-  font-size: 40px;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-auto-rows: minmax(50px, auto);
+  font-size: 22px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.25);
+  padding: 30px;
+  color: #343434;
+  overflow: hidden;
 }
 
-.display {
-  grid-column: 1 / 5;
-  background-color: #333;
-  color: white;
-}
-
-.zero {
-  grid-column: 1 / 3;
+.calculator.threed {
+  transform: rotateX(65deg) rotateZ(-35deg);
 }
 
 .btn {
-  background-color: #f2f2f2;
-  border: 1px solid #999;
+  display: block;
+  flex: 0 0 60px;
+  height: 60px;
+  line-height: 60px;
+  margin: 20px;
+  background: #fff;
+  border-radius: 100%;
+  cursor: pointer;
 }
-
+.btn:hover,
 .btn:active {
-  background-color: #ccc;
+  background: #ccc;
 }
 
+.btn.operator:hover,
 .btn.operator:active {
-  background-color: orangered;
+  background: #ccc;
+}
+
+.display {
+  flex: 0 0 100%;
+  color: #333;
+  text-align: right;
+  font-size: 78px;
+  padding: 100px 0px 15px;
+  border-bottom: 1px solid #dedede;
+  margin-bottom: 15px;
 }
 
 .operator {
-  background-color: orange;
-  color: white;
+  background: #f0f0f0;
+  color: $red;
+  font-size: 24px;
+}
+
+.btn.operator.top-operator {
+  color: #343434;
+}
+.btn.operator.equals {
+  background: $red;
+  color: #fff;
+}
+.btn.operator.equals:hover,
+.btn.operator.equals:active {
+  background: darken($red, 10%);
 }
 </style>

@@ -14,15 +14,20 @@ export default {
 };
 </script>
 
-<style>
-#app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
+<style lang="scss">
+$red: #ea6262;
+html {
+  min-width: 100vh;
+  min-height: 100vh;
+  font-family: "Overpass Mono", san-serif;
+  font-weight: 400;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: $red;
+}
+#app {
   text-align: center;
-  color: #2c3e50;
   margin-top: 60px;
+  perspective: 3000px;
 }
 </style>
-© 2019 GitHub, Inc. Terms Privacy Security Status Help Contact GitHub Pricing
-API Training Blog About
