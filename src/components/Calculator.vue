@@ -1,5 +1,5 @@
 <template>
-  <div class="calculator threed">
+  <div class="calculator" v-bind:class="{ threed: isThreeD }">
     <div class="display">{{ current || "0" }}</div>
     <div @click="clear" class="btn operator top-operator">C</div>
     <div @click="sign" class="btn operator top-operator">+/-</div>
@@ -21,6 +21,7 @@
     <div @click="append('0')" class="btn zero">00</div>
     <div @click="dot" class="btn">.</div>
     <div @click="equal" class="btn operator equals">=</div>
+    <div @click="isThreeD = !isThreeD" class="threed-mode">3D</div>
   </div>
 </template>
 
@@ -31,7 +32,8 @@ export default {
       previous: null,
       current: "",
       operator: null,
-      operatorClicked: false
+      operatorClicked: false,
+      isThreeD: false
     };
   },
   methods: {
@@ -105,6 +107,8 @@ $red: #ea6262;
   padding: 30px;
   color: #343434;
   overflow: hidden;
+  transition: transform 0.25s;
+  position: relative;
 }
 
 .calculator.threed {
@@ -157,5 +161,19 @@ $red: #ea6262;
 .btn.operator.equals:hover,
 .btn.operator.equals:active {
   background: darken($red, 10%);
+}
+
+.threed-mode {
+  position: absolute;
+  top: 30px;
+  left: 30px;
+  background: $red;
+  padding: 10px;
+  border-radius: 70px;
+  color: #fff;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  cursor: pointer;
 }
 </style>
